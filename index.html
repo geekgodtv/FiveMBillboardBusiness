@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiveM Billboard Advertising Pricing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+        }
+        .ui-card {
+            background-color: #121212;
+            border: 1px solid #00BFFF; /* Neon Blue */
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+        }
+        .neon-blue-text {
+            color: #00BFFF;
+        }
+        .neon-yellow-text {
+            color: #FFFF00;
+        }
+        .section-title {
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #00BFFF;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+        /* Custom Radio/Checkbox Styles */
+        input[type="radio"], input[type="checkbox"] {
+            display: none;
+        }
+        input[type="radio"] + label, input[type="checkbox"] + label {
+            cursor: pointer;
+            padding: 12px 16px;
+            border: 2px solid #333;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            display: block;
+            background-color: #1a1a1a;
+        }
+        input[type="radio"]:hover + label, input[type="checkbox"]:hover + label {
+            border-color: #FFFF00; /* Neon Yellow on hover */
+        }
+        input[type="radio"]:checked + label, input[type="checkbox"]:checked + label {
+            background-color: #00BFFF;
+            border-color: #00BFFF;
+            color: #000000;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+        }
+        .price-display {
+            background-color: #000;
+            border: 2px solid #FFFF00;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+        }
+        .ad-creation-options {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+        input#ad-creation-toggle:checked ~ .ad-creation-options {
+            max-height: 500px; /* Adjust as needed */
+            opacity: 1;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="ui-card w-full max-w-4xl p-6 md:p-8 rounded-3xl text-white">
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-black neon-blue-text tracking-wider">BILLBOARD ADVERTISING</h1>
+            <p class="text-gray-400 mt-2">Interactive Pricing Calculator</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Options Column -->
+            <div>
+                <!-- Step 1: Location -->
+                <div class="mb-6">
+                    <h2 class="section-title neon-blue-text">1. Select Location Tier</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="location-options">
+                        <div>
+                            <input type="radio" id="loc-prime" name="location" value="prime" checked>
+                            <label for="loc-prime" class="text-center">Prime</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="loc-standard" name="location" value="standard">
+                            <label for="loc-standard" class="text-center">Standard</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="loc-rural" name="location" value="rural">
+                            <label for="loc-rural" class="text-center">Rural</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Duration -->
+                <div class="mb-6">
+                    <h2 class="section-title neon-blue-text">2. Select Duration</h2>
+                    <div class="grid grid-cols-2 gap-3" id="duration-options">
+                        <div>
+                            <input type="radio" id="dur-3" name="duration" value="3">
+                            <label for="dur-3">Weekend (3 Days)</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="dur-7" name="duration" value="7">
+                            <label for="dur-7">1 Week (7 Days)</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="dur-14" name="duration" value="14" checked>
+                            <label for="dur-14">2 Weeks (14 Days)</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="dur-30" name="duration" value="30">
+                            <label for="dur-30">1 Month (30 Days)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Ad Creation -->
+                <div class="mb-6">
+                    <h2 class="section-title neon-blue-text">3. Ad Creation Service</h2>
+                    <input type="checkbox" id="ad-creation-toggle" name="ad-creation-toggle">
+                    <label for="ad-creation-toggle">Add Professional Ad Design</label>
+                    
+                    <div class="ad-creation-options grid grid-cols-1 sm:grid-cols-3 gap-3" id="ad-design-options">
+                        <div>
+                            <input type="radio" id="design-basic" name="design" value="basic" checked>
+                            <label for="design-basic" class="text-center">Basic</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="design-standard" name="design" value="standard">
+                            <label for="design-standard" class="text-center">Standard</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="design-premium" name="design" value="premium">
+                            <label for="design-premium" class="text-center">Premium</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Totals Column -->
+            <div class="flex flex-col justify-center items-center p-6 bg-black/50 rounded-3xl">
+                <h2 class="text-2xl font-bold uppercase neon-yellow-text mb-4 tracking-widest">Total Cost</h2>
+                
+                <div class="price-display w-full p-6 rounded-3xl text-center mb-4">
+                    <p class="text-lg text-gray-400 mb-2">In-Game Price</p>
+                    <p id="total-ingame" class="text-4xl font-black neon-blue-text">$0</p>
+                </div>
+                
+                <div class="price-display w-full p-6 rounded-3xl text-center">
+                    <p class="text-lg text-gray-400 mb-2">Real Money (USD)</p>
+                    <p id="total-usd" class="text-4xl font-black neon-blue-text">$0</p>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-6 text-center">Prices update automatically. Please open a Discord ticket to finalize your purchase.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- PRICING DATA ---
+        // All prices are stored here for easy updates.
+        const pricing = {
+            locations: {
+                prime: { 3: 500000, 7: 400000, 14: 700000, 30: 1200000, usd: { 3: 12, 7: 10, 14: 18, 30: 30 } },
+                standard: { 3: 200000, 7: 150000, 14: 250000, 30: 450000, usd: { 3: 6, 7: 5, 14: 8, 30: 15 } },
+                rural: { 3: 100000, 7: 75000, 14: 130000, 30: 225000, usd: { 3: 4, 7: 3, 14: 5, 30: 8 } }
+            },
+            adCreation: {
+                basic: { ingame: 200000, usd: 5 },
+                standard: { ingame: 500000, usd: 12 },
+                premium: { ingame: 1250000, usd: 25 }
+            }
+        };
+
+        // --- DOM ELEMENTS ---
+        const locationOptions = document.getElementById('location-options');
+        const durationOptions = document.getElementById('duration-options');
+        const adCreationToggle = document.getElementById('ad-creation-toggle');
+        const adDesignOptions = document.getElementById('ad-design-options');
+        const totalIngameEl = document.getElementById('total-ingame');
+        const totalUsdEl = document.getElementById('total-usd');
+
+        // --- CALCULATION LOGIC ---
+        function calculateTotal() {
+            // Get selected values
+            const selectedLocation = document.querySelector('input[name="location"]:checked').value;
+            const selectedDuration = document.querySelector('input[name="duration"]:checked').value;
+            const addAdCreation = adCreationToggle.checked;
+            const selectedDesign = document.querySelector('input[name="design"]:checked').value;
+
+            // 1. Calculate billboard cost
+            let ingameCost = pricing.locations[selectedLocation][selectedDuration];
+            let usdCost = pricing.locations[selectedLocation].usd[selectedDuration];
+            
+            // Handle special case for Prime Weekend Takeover
+            if (selectedLocation === 'prime' && selectedDuration === '3') {
+                // The pricing object already handles this specific value
+            }
+
+            // 2. Add ad creation cost if selected
+            if (addAdCreation) {
+                ingameCost += pricing.adCreation[selectedDesign].ingame;
+                usdCost += pricing.adCreation[selectedDesign].usd;
+            }
+
+            // 3. Update the UI
+            // Format numbers with commas for readability
+            totalIngameEl.textContent = `$${ingameCost.toLocaleString()}`;
+            totalUsdEl.textContent = `$${usdCost.toLocaleString()}`;
+        }
+
+        // --- EVENT LISTENERS ---
+        // Listen for changes on any of the inputs
+        locationOptions.addEventListener('change', calculateTotal);
+        durationOptions.addEventListener('change', calculateTotal);
+        adCreationToggle.addEventListener('change', calculateTotal);
+        adDesignOptions.addEventListener('change', calculateTotal);
+
+        // --- INITIAL CALCULATION ---
+        // Run the calculation once on page load to set the default price.
+        document.addEventListener('DOMContentLoaded', calculateTotal);
+    </script>
+</body>
+</html>
